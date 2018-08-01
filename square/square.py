@@ -8,7 +8,7 @@ import torchvision.transforms as T
 from PIL import Image
 import os
 import numpy as np
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 
 learning_rate = 0.0015
@@ -122,17 +122,17 @@ while err > 0 and t < 500000:
 
 # print_model(t, loss.item())
 
-fig, ax1 = plt.subplots()
+# fig, ax1 = plt.subplots()
 
-ax1.set_xlabel('generation')
-ax1.set_ylabel('errors')
-ax1.plot(range(len(errors)), errors, color='tab:red')
+# ax1.set_xlabel('generation')
+# ax1.set_ylabel('errors')
+# ax1.plot(range(len(errors)), errors, color='tab:red')
 
-# ax2 = ax1.twinx()
-# ax2.set_ylabel('loss', color='tab:blue')
-# ax2.plot(range(len(agg)), agg, color='tab:blue')
-# ax2.tick_params(axis='y', labelcolor='tab:blue')
+# # ax2 = ax1.twinx()
+# # ax2.set_ylabel('loss', color='tab:blue')
+# # ax2.plot(range(len(agg)), agg, color='tab:blue')
+# # ax2.tick_params(axis='y', labelcolor='tab:blue')
 
-fig.tight_layout()
+# fig.tight_layout()
 
-plt.show()
+# plt.show()
