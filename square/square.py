@@ -33,7 +33,7 @@ transform = T.Compose([
 square = transform(square)
 print(square)
 print(square.shape)
-
+print('cuda is available', torch.cuda.is_available())
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
 def inputs_reference():
