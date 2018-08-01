@@ -112,10 +112,10 @@ while err > 0 and t < 500000:
 	optimizer.step()
 	err = calc_err(prediction, reference)
 	errors = np.append(errors, err)
-	if err < sm:
-		if err < sm:
-			sm = err
-		print_model(t, err)
+	# if err < sm:
+	# 	if err < sm:
+	# 		sm = err
+	# 	print_model(t, err)
 	print('error: ' + str(err) + ' generation: ' + str(t))
 	# agg = np.append(agg, loss.item())
 
