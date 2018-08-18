@@ -1,7 +1,9 @@
 from collections import namedtuple
 import random
+import numpy as np
 
-Transition = namedtuple('Transition', ('state', 'action', 'next_state', 'reward'))
+def Transition(a, b, c, d):
+	return [a, b, c, d]
 
 class Memory(object):
 
@@ -21,3 +23,18 @@ class Memory(object):
 
 	def __len__(self):
 		return len(self.memory)
+
+	def reset():
+		self.memory = []
+		self.position = 0
+
+	def save(self, filename):
+		filename = filename + '.kitty'
+		f = open(filename, 'w+b')
+		flat_format = []
+		for setup in self.memory:
+			for i in setup:
+				flat_format.append(i)
+		byte_format = bytearray(flat_format)
+		f.write(byte_format)
+		f.close()

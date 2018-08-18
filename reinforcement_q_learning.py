@@ -214,9 +214,20 @@ class DQN(nn.Module):
         self.head = nn.Linear(448, 2)
 
     def forward(self, x):
-        x = F.relu(self.bn1(self.conv1(x)))
-        x = F.relu(self.bn2(self.conv2(x)))
-        x = F.relu(self.bn3(self.conv3(x)))
+
+        print('input', x.shape)
+        x = self.conv1(x)
+        print('conv1', x.shape)
+        x = F.relu(self.bn1(x))
+        print('bn1', x.shape)
+        x = self.conv2(x)
+        print('conv2', x.shape)
+        x = F.relu(self.bn2(x))
+        print('bn2', x.shape)
+        x = self.conv3(x)
+        print('conv3', x.shape)
+        x = F.relu(self.bn3(x))
+        print('bn3', x.shape)
         return self.head(x.view(x.size(0), -1))
 
 
@@ -298,7 +309,7 @@ plt.show()
 #    episode.
 #
 
-BATCH_SIZE = 1
+BATCH_SIZE = 128
 GAMMA = 0.999
 EPS_START = 0.9
 EPS_END = 0.05
@@ -311,7 +322,7 @@ target_net.load_state_dict(policy_net.state_dict())
 target_net.eval()
 
 optimizer = optim.RMSprop(policy_net.parameters())
-memory = ReplayMemory(100000)
+memory = ReplayMemory(10000)
 
 
 steps_done = 0
@@ -325,7 +336,13 @@ def select_action(state):
     steps_done += 1
     if sample > eps_threshold:
         with torch.no_grad():
-            return policy_net(state).max(1)[1].view(1, 1)
+            oput = policy_net(state)
+            print('net', oput)
+            oput = oput.max(1)[1]
+            print('max', oput)
+            oput = oput.view(1, 1)
+            print('view', oput)
+            return oput
     else:
         return torch.tensor([[random.randrange(2)]], device=device, dtype=torch.long)
 
@@ -377,51 +394,30 @@ def optimize_model():
     transitions = memory.sample(BATCH_SIZE)
     # Transpose the batch (see http://stackoverflow.com/a/19343/3343043 for
     # detailed explanation).
-    # print('transitions', transitions)
-    # exit()
     batch = Transition(*zip(*transitions))
-    # exit()
-    # print('batch', batch[1])
 
     # Compute a mask of non-final states and concatenate the batch elements
     non_final_mask = torch.tensor(tuple(map(lambda s: s is not None,
                                           batch.next_state)), device=device, dtype=torch.uint8)
-    non_final_mask[0] = 0
-    # print(batch.next_state)
-    # print(map(lambda s: s is not None, batch.next_state))
-    # exit()
-
     non_final_next_states = torch.cat([s for s in batch.next_state
                                                 if s is not None])
     state_batch = torch.cat(batch.state)
     action_batch = torch.cat(batch.action)
     reward_batch = torch.cat(batch.reward)
 
-    # print(action_batch)
-    # exit()
-
     # Compute Q(s_t, a) - the model computes Q(s_t), then we select the
     # columns of actions taken
-
-    print('state_batch', state_batch)
-    print('policy_net(state_batch)', policy_net(state_batch))
-    print('action_batch', action_batch)
     state_action_values = policy_net(state_batch).gather(1, action_batch)
-
-    print('state_action_values', state_action_values)
 
     # Compute V(s_{t+1}) for all next states.
     next_state_values = torch.zeros(BATCH_SIZE, device=device)
-    
     next_state_values[non_final_mask] = target_net(non_final_next_states).max(1)[0].detach()
-    print('next_state_values', next_state_values)
-    print('reward_batch', reward_batch)
     # Compute the expected Q values
     expected_state_action_values = (next_state_values * GAMMA) + reward_batch
 
     # Compute Huber loss
     loss = F.smooth_l1_loss(state_action_values, expected_state_action_values.unsqueeze(1))
-    exit()
+
     # Optimize the model
     optimizer.zero_grad()
     loss.backward()
@@ -442,7 +438,7 @@ def optimize_model():
 # the notebook and run lot more epsiodes.
 #
 
-num_episodes = 1000
+num_episodes = 50
 for i_episode in range(num_episodes):
     # Initialize the environment and state
     env.reset()

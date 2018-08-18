@@ -45,4 +45,3 @@ class Net(nn.Module):
 		out = self(input)
 		out = out[0].max(1)[1]
 		return out
-

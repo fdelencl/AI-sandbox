@@ -5,6 +5,9 @@ from memory import Memory
 from pyglet.window import key
 import time
 
+import signal
+import sys
+
 env = retro.make(game='Gradius-Nes', state='Level1')
 # env = retro.make(game='GradiusIII-Snes', state='Level1.Mode1.Shield')
 
@@ -12,6 +15,11 @@ env = retro.make(game='Gradius-Nes', state='Level1')
 
 n = Net().to(device)
 m = Memory(15000)
+stop = False
+def signal_handler(sig, frame):
+	global stop
+	stop = True
+signal.signal(signal.SIGINT, signal_handler)
 
 done = False
 
@@ -77,13 +85,13 @@ def loop():
 	else:
 		next_state = None
 		env.reset()
-	m.push(state, action, next_state, _rew)
+	m.push(1, 2, 3, 4)
 	state = next_state
 	env.render()
 
 fps = 50
 skipticks = 1/(fps*1.0)
-while (True):
+while not stop:
 	tim1 = time.clock()
 	loop()
 	tim2 = time.clock()
@@ -91,3 +99,9 @@ while (True):
 		print('took already too long')
 	else:
 		time.sleep(tim1 + skipticks - tim2)
+	stop = True
+
+
+m.save('loli')
+env.close()
+sys.exit(0)
