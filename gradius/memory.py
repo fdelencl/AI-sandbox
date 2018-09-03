@@ -1,6 +1,5 @@
-from collections import namedtuple
 import random
-import numpy as np
+import pickle
 
 def Transition(a, b, c, d):
 	return [a, b, c, d]
@@ -31,10 +30,9 @@ class Memory(object):
 	def save(self, filename):
 		filename = filename + '.kitty'
 		f = open(filename, 'w+b')
-		flat_format = []
-		for setup in self.memory:
-			for i in setup:
-				flat_format.append(i)
-		byte_format = bytearray(flat_format)
-		f.write(byte_format)
+		pickle.dump(self.memory, f)
 		f.close()
+
+	def load(self, filename):
+		f = open('loli.kitty', 'r+b')
+		mem = pickle.load(f)

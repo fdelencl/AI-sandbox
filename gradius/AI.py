@@ -1,3 +1,5 @@
+#!/usr/local/bin/python3
+
 import retro
 
 from net import Net, device
@@ -15,6 +17,9 @@ env = retro.make(game='Gradius-Nes', state='Level1')
 
 n = Net().to(device)
 m = Memory(15000)
+
+# m.load('loli.kitty')
+
 stop = False
 def signal_handler(sig, frame):
 	global stop
@@ -85,21 +90,22 @@ def loop():
 	else:
 		next_state = None
 		env.reset()
-	m.push(1, 2, 3, 4)
+	m.push(state, action, next_state, _rew)
 	state = next_state
 	env.render()
 
 fps = 50
 skipticks = 1/(fps*1.0)
 while not stop:
-	tim1 = time.clock()
+	tim1 = time.perf_counter()
 	loop()
-	tim2 = time.clock()
+	tim2 = time.perf_counter()
 	if tim2 > tim1 + skipticks:
 		print('took already too long')
 	else:
 		time.sleep(tim1 + skipticks - tim2)
-	stop = True
+
+
 
 
 m.save('loli')
