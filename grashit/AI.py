@@ -4,8 +4,8 @@ import retro
 
 from net import Net, device
 from memory import Memory
-from pyglet.window import key
 import time
+import torch.optim as optim
 
 import signal
 import sys
@@ -17,6 +17,8 @@ env = retro.make(game='Gradius-Nes', state='Level1')
 
 n = Net().to(device)
 m = Memory(15000)
+o = optim.RMSprop(policy_net.parameters())
+
 
 # m.load('loli.kitty')
 
@@ -79,6 +81,9 @@ env.render()
 
 env.unwrapped.viewer.window.on_key_press = on_key_press
 env.unwrapped.viewer.window.on_key_release = on_key_release
+
+def optimize():
+
 
 def loop():
 	global current_screen, last_screen, state
