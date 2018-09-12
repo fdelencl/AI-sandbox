@@ -15,56 +15,74 @@ transform = T.Compose([T.ToTensor()])
 class Net(nn.Module):
 	def __init__(self, num_inputs, action_space):
 		super(Net, self).__init__()
-		self.conv1 = nn.Conv1d(num_inputs, 32, 3, stride=1, padding=1)
-		self.lrelu1 = nn.LeakyReLU(0.1)
-		self.conv2 = nn.Conv1d(32, 32, 3, stride=1, padding=1)
-		self.lrelu2 = nn.LeakyReLU(0.1)
-		self.conv3 = nn.Conv1d(32, 64, 2, stride=1, padding=1)
-		self.lrelu3 = nn.LeakyReLU(0.1)
-		self.conv4 = nn.Conv1d(64, 64, 1, stride=1)
-		self.lrelu4 = nn.LeakyReLU(0.1)
+		self.conv1 = nn.Conv2d(3, 16, kernel_size=5, stride=2)
+		self.bn1 = nn.BatchNorm2d(16)
+		self.conv2 = nn.Conv2d(16, 32, kernel_size=5, stride=2)
+		self.bn2 = nn.BatchNorm2d(32)
+		self.conv3 = nn.Conv2d(32, 32, kernel_size=5, stride=2)
+		self.bn3 = nn.BatchNorm2d(32)
+		self.conv4 = nn.Conv2d(32, 32, kernel_size=5, stride=2)
+		self.bn4 = nn.BatchNorm2d(32)
+		self.head = nn.Linear(4224, 18)
 
-		self.lstm = nn.LSTMCell(1600, 128)
-		num_outputs = action_space.shape[0]
-		self.critic_linear = nn.Linear(128, 1)
-		self.actor_linear = nn.Linear(128, num_outputs)
-		self.actor_linear2 = nn.Linear(128, num_outputs)
+		# self.conv1 = nn.Conv2d(3, 32, stride=1, padding=1)
+		# self.lrelu1 = nn.LeakyReLU(0.1)
+		# self.conv2 = nn.Conv2d(32, 32, stride=1, padding=1)
+		# self.lrelu2 = nn.LeakyReLU(0.1)
+		# self.conv3 = nn.Conv2d(32, 64, stride=1, padding=1)
+		# self.lrelu3 = nn.LeakyReLU(0.1)
+		# self.conv4 = nn.Conv2d(64, 64, 1, stride=1)
+		# self.lrelu4 = nn.LeakyReLU(0.1)
 
-		self.apply(weights_init)
-		lrelu_gain = nn.init.calculate_gain('leaky_relu')
-		self.conv1.weight.data.mul_(lrelu_gain)
-		self.conv2.weight.data.mul_(lrelu_gain)
-		self.conv3.weight.data.mul_(lrelu_gain)
-		self.conv4.weight.data.mul_(lrelu_gain)
+		# self.lstm = nn.LSTMCell(1600, 128)
+		# num_outputs = action_space.shape[0]
+		# self.critic_linear = nn.Linear(128, 1)
+		# self.actor_linear = nn.Linear(128, num_outputs)
+		# self.actor_linear2 = nn.Linear(128, num_outputs)
 
-		self.actor_linear.weight.data = norm_col_init(
-			self.actor_linear.weight.data, 0.01)
-		self.actor_linear.bias.data.fill_(0)
-		self.actor_linear2.weight.data = norm_col_init(
-			self.actor_linear2.weight.data, 0.01)
-		self.actor_linear2.bias.data.fill_(0)
-		self.critic_linear.weight.data = norm_col_init(
-			self.critic_linear.weight.data, 1.0)
-		self.critic_linear.bias.data.fill_(0)
+		# self.apply(weights_init)
+		# lrelu_gain = nn.init.calculate_gain('leaky_relu')
+		# self.conv1.weight.data.mul_(lrelu_gain)
+		# self.conv2.weight.data.mul_(lrelu_gain)
+		# self.conv3.weight.data.mul_(lrelu_gain)
+		# self.conv4.weight.data.mul_(lrelu_gain)
 
-		self.lstm.bias_ih.data.fill_(0)
-		self.lstm.bias_hh.data.fill_(0)
+		# self.actor_linear.weight.data = norm_col_init(
+		# 	self.actor_linear.weight.data, 0.01)
+		# self.actor_linear.bias.data.fill_(0)
+		# self.actor_linear2.weight.data = norm_col_init(
+		# 	self.actor_linear2.weight.data, 0.01)
+		# self.actor_linear2.bias.data.fill_(0)
+		# self.critic_linear.weight.data = norm_col_init(
+		# 	self.critic_linear.weight.data, 1.0)
+		# self.critic_linear.bias.data.fill_(0)
+
+		# self.lstm.bias_ih.data.fill_(0)
+		# self.lstm.bias_hh.data.fill_(0)
 
 		self.train()
 
 	def forward(self, inputs):
 		x, (hx, cx) = inputs
 
-		x = self.lrelu1(self.conv1(x))
-		x = self.lrelu2(self.conv2(x))
-		x = self.lrelu3(self.conv3(x))
-		x = self.lrelu4(self.conv4(x))
+		print(x.shape)
 
-		x = x.view(x.size(0), -1)
-		hx, cx = self.lstm(x, (hx, cx))
-		x = hx
+		x = self.conv1(x)
+		x = F.relu(self.bn1(x))
+		x = self.conv2(x)
+		x = F.relu(self.bn2(x))
+		x = self.conv3(x)
+		x = F.sigmoid(self.bn3(x))
+		x = self.conv4(x)
+		x = F.sigmoid(self.bn4(x))
+		x = self.head(x.view(x.size(0), -1))
+		return x.view((x.size(0), 9, 2))
 
-		return self.critic_linear(x), F.softsign(self.actor_linear(x)), self.actor_linear2(x), (hx, cx)
+		# x = x.view(x.size(0), -1)
+		# hx, cx = self.lstm(x, (hx, cx))
+		# x = hx
+
+		# return self.critic_linear(x), F.softsign(self.actor_linear(x)), self.actor_linear2(x), (hx, cx)
 
 
 	def prepare_input(self, screen):

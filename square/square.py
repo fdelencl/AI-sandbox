@@ -110,6 +110,8 @@ while err > 0 and t < 500000:
 	loss.backward()
 	# print(loss)
 	optimizer.step()
+	print('prediction', prediction.shape, prediction)
+	print('reference', reference.shape, reference)
 	err = calc_err(prediction, reference)
 	errors = np.append(errors, err)
 	if err < sm:

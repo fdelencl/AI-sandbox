@@ -7,7 +7,7 @@ import sys
 
 import numpy as np
 
-from model import Net
+from model import Net, device
 from optimizer import SharedRMSprop
 
 parser = argparse.ArgumentParser(description='')
@@ -81,14 +81,15 @@ env.unwrapped.viewer.window.on_key_release = on_key_release
 fps = 50
 skipticks = 1/(fps*1.0)
 
-shared_model = Net(env.observation_space.shape[0], user_actions)
+
+print(screen.shape)
+shared_model = Net(3, user_actions).to(device)
 optimizer = SharedRMSprop(shared_model.parameters(), lr=0.001)
 hx = None
 cx = None
 def loop():
 	global screen, hx, cx
-	cr_lin, action, stuff, (hx, cx) = shared_model.select_action(screen, (hx, cx))
-	print(action)
+	action = shared_model.select_action(screen, (hx, cx))
 	screen, _rew, done, _info = env.step(action)
 	env.render()
 
