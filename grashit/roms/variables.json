@@ -1,0 +1,1408 @@
+{
+  "info": {
+    "": {
+      "address": 61,
+      "type": "|u1"
+    },
+    "1bit-clock": {
+      "address": 313,
+      "type": ">d8"
+    },
+    "1bit-clock_1": {
+      "address": 313,
+      "type": "|u1"
+    },
+    "1bit-clock_2": {
+      "address": 314,
+      "type": "|u1"
+    },
+    "1bit-clock_3": {
+      "address": 315,
+      "type": "|u1"
+    },
+    "1bit-clock_4": {
+      "address": 316,
+      "type": "|u1"
+    },
+    "1bit-clock_5": {
+      "address": 317,
+      "type": "|u1"
+    },
+    "1bit-clock_6": {
+      "address": 318,
+      "type": "|u1"
+    },
+    "1bit-clock_7": {
+      "address": 319,
+      "type": "|u1"
+    },
+    "1bit-clock_8": {
+      "address": 320,
+      "type": "|u1"
+    },
+    "1bit-clock_9": {
+      "address": 321,
+      "type": "|u1"
+    },
+    "1bit-clock_a": {
+      "address": 322,
+      "type": "|u1"
+    },
+    "1bit-clock_b": {
+      "address": 323,
+      "type": "|u1"
+    },
+    "1bit-clock_c": {
+      "address": 324,
+      "type": "|u1"
+    },
+    "1bit-clock_d": {
+      "address": 325,
+      "type": "|u1"
+    },
+    "2f0": {
+      "address": 752,
+      "type": "|u1"
+    },
+    "2f1": {
+      "address": 753,
+      "type": "|u1"
+    },
+    "2f2": {
+      "address": 754,
+      "type": "|u1"
+    },
+    "2f3": {
+      "address": 755,
+      "type": "|u1"
+    },
+    "2f4": {
+      "address": 756,
+      "type": "|u1"
+    },
+    "2f5": {
+      "address": 757,
+      "type": "|u1"
+    },
+    "2f6": {
+      "address": 758,
+      "type": "|u1"
+    },
+    "2f7": {
+      "address": 759,
+      "type": "|u1"
+    },
+    "2f8": {
+      "address": 760,
+      "type": "|u1"
+    },
+    "2f9": {
+      "address": 761,
+      "type": "|u1"
+    },
+    "2fa": {
+      "address": 762,
+      "type": "|u1"
+    },
+    "2fb": {
+      "address": 763,
+      "type": "|u1"
+    },
+    "2fc": {
+      "address": 764,
+      "type": "|u1"
+    },
+    "2fd": {
+      "address": 765,
+      "type": "|u1"
+    },
+    "2fe": {
+      "address": 766,
+      "type": "|u1"
+    },
+    "2ff": {
+      "address": 767,
+      "type": "|u1"
+    },
+    "300": {
+      "address": 768,
+      "type": "|u1"
+    },
+    "301": {
+      "address": 769,
+      "type": "|u1"
+    },
+    "302": {
+      "address": 770,
+      "type": "|u1"
+    },
+    "303": {
+      "address": 771,
+      "type": "|u1"
+    },
+    "304": {
+      "address": 772,
+      "type": "|u1"
+    },
+    "305": {
+      "address": 773,
+      "type": "|u1"
+    },
+    "306": {
+      "address": 774,
+      "type": "|u1"
+    },
+    "307": {
+      "address": 775,
+      "type": "|u1"
+    },
+    "308": {
+      "address": 776,
+      "type": "|u1"
+    },
+    "309": {
+      "address": 777,
+      "type": "|u1"
+    },
+    "30a": {
+      "address": 778,
+      "type": "|u1"
+    },
+    "30b": {
+      "address": 779,
+      "type": "|u1"
+    },
+    "30c": {
+      "address": 780,
+      "type": "|u1"
+    },
+    "30d": {
+      "address": 781,
+      "type": "|u1"
+    },
+    "30e": {
+      "address": 782,
+      "type": "|u1"
+    },
+    "30f": {
+      "address": 783,
+      "type": "|u1"
+    },
+    "310": {
+      "address": 784,
+      "type": "|u1"
+    },
+    "311": {
+      "address": 785,
+      "type": "|u1"
+    },
+    "312": {
+      "address": 786,
+      "type": "|u1"
+    },
+    "313": {
+      "address": 787,
+      "type": "|u1"
+    },
+    "314": {
+      "address": 788,
+      "type": "|u1"
+    },
+    "315": {
+      "address": 789,
+      "type": "|u1"
+    },
+    "316": {
+      "address": 790,
+      "type": "|u1"
+    },
+    "317": {
+      "address": 791,
+      "type": "|u1"
+    },
+    "318": {
+      "address": 792,
+      "type": "|u1"
+    },
+    "319": {
+      "address": 793,
+      "type": "|u1"
+    },
+    "31a": {
+      "address": 794,
+      "type": "|u1"
+    },
+    "31b": {
+      "address": 795,
+      "type": "|u1"
+    },
+    "31c": {
+      "address": 796,
+      "type": "|u1"
+    },
+    "31d": {
+      "address": 797,
+      "type": "|u1"
+    },
+    "31e": {
+      "address": 798,
+      "type": "|u1"
+    },
+    "31f": {
+      "address": 799,
+      "type": "|u1"
+    },
+    "320": {
+      "address": 800,
+      "type": "|u1"
+    },
+    "321": {
+      "address": 801,
+      "type": "|u1"
+    },
+    "322": {
+      "address": 802,
+      "type": "|u1"
+    },
+    "323": {
+      "address": 803,
+      "type": "|u1"
+    },
+    "324": {
+      "address": 804,
+      "type": "|u1"
+    },
+    "325": {
+      "address": 805,
+      "type": "|u1"
+    },
+    "326": {
+      "address": 806,
+      "type": "|u1"
+    },
+    "327": {
+      "address": 807,
+      "type": "|u1"
+    },
+    "328": {
+      "address": 808,
+      "type": "|u1"
+    },
+    "329": {
+      "address": 809,
+      "type": "|u1"
+    },
+    "32a": {
+      "address": 810,
+      "type": "|u1"
+    },
+    "32b": {
+      "address": 811,
+      "type": "|u1"
+    },
+    "32c": {
+      "address": 812,
+      "type": "|u1"
+    },
+    "32d": {
+      "address": 813,
+      "type": "|u1"
+    },
+    "32e": {
+      "address": 814,
+      "type": "|u1"
+    },
+    "32f": {
+      "address": 815,
+      "type": "|u1"
+    },
+    "330": {
+      "address": 816,
+      "type": "|u1"
+    },
+    "331": {
+      "address": 817,
+      "type": "|u1"
+    },
+    "332": {
+      "address": 818,
+      "type": "|u1"
+    },
+    "333": {
+      "address": 819,
+      "type": "|u1"
+    },
+    "334": {
+      "address": 820,
+      "type": "|u1"
+    },
+    "335": {
+      "address": 821,
+      "type": "|u1"
+    },
+    "336": {
+      "address": 822,
+      "type": "|u1"
+    },
+    "337": {
+      "address": 823,
+      "type": "|u1"
+    },
+    "338": {
+      "address": 824,
+      "type": "|u1"
+    },
+    "339": {
+      "address": 825,
+      "type": "|u1"
+    },
+    "33a": {
+      "address": 826,
+      "type": "|u1"
+    },
+    "33b": {
+      "address": 827,
+      "type": "|u1"
+    },
+    "33c": {
+      "address": 828,
+      "type": "|u1"
+    },
+    "33d": {
+      "address": 829,
+      "type": "|u1"
+    },
+    "33e": {
+      "address": 830,
+      "type": "|u1"
+    },
+    "33f": {
+      "address": 831,
+      "type": "|u1"
+    },
+    "370": {
+      "address": 880,
+      "type": "|u1"
+    },
+    "371": {
+      "address": 881,
+      "type": "|u1"
+    },
+    "372": {
+      "address": 882,
+      "type": "|u1"
+    },
+    "373": {
+      "address": 883,
+      "type": "|u1"
+    },
+    "374": {
+      "address": 884,
+      "type": "|u1"
+    },
+    "375": {
+      "address": 885,
+      "type": "|u1"
+    },
+    "376": {
+      "address": 886,
+      "type": "|u1"
+    },
+    "377": {
+      "address": 887,
+      "type": "|u1"
+    },
+    "378": {
+      "address": 888,
+      "type": "|u1"
+    },
+    "379": {
+      "address": 889,
+      "type": "|u1"
+    },
+    "37a": {
+      "address": 890,
+      "type": "|u1"
+    },
+    "37b": {
+      "address": 891,
+      "type": "|u1"
+    },
+    "37c": {
+      "address": 892,
+      "type": "|u1"
+    },
+    "37d": {
+      "address": 893,
+      "type": "|u1"
+    },
+    "37e": {
+      "address": 894,
+      "type": "|u1"
+    },
+    "37f": {
+      "address": 895,
+      "type": "|u1"
+    },
+    "380": {
+      "address": 896,
+      "type": "|u1"
+    },
+    "381": {
+      "address": 897,
+      "type": "|u1"
+    },
+    "382": {
+      "address": 898,
+      "type": "|u1"
+    },
+    "383": {
+      "address": 899,
+      "type": "|u1"
+    },
+    "384": {
+      "address": 900,
+      "type": "|u1"
+    },
+    "385": {
+      "address": 901,
+      "type": "|u1"
+    },
+    "386": {
+      "address": 902,
+      "type": "|u1"
+    },
+    "387": {
+      "address": 903,
+      "type": "|u1"
+    },
+    "388": {
+      "address": 904,
+      "type": "|u1"
+    },
+    "389": {
+      "address": 905,
+      "type": "|u1"
+    },
+    "38a": {
+      "address": 906,
+      "type": "|u1"
+    },
+    "38b": {
+      "address": 907,
+      "type": "|u1"
+    },
+    "38c": {
+      "address": 908,
+      "type": "|u1"
+    },
+    "38d": {
+      "address": 909,
+      "type": "|u1"
+    },
+    "38e": {
+      "address": 910,
+      "type": "|u1"
+    },
+    "38f": {
+      "address": 911,
+      "type": "|u1"
+    },
+    "390": {
+      "address": 912,
+      "type": "|u1"
+    },
+    "391": {
+      "address": 913,
+      "type": "|u1"
+    },
+    "392": {
+      "address": 914,
+      "type": "|u1"
+    },
+    "393": {
+      "address": 915,
+      "type": "|u1"
+    },
+    "394": {
+      "address": 916,
+      "type": "|u1"
+    },
+    "395": {
+      "address": 917,
+      "type": "|u1"
+    },
+    "396": {
+      "address": 918,
+      "type": "|u1"
+    },
+    "397": {
+      "address": 919,
+      "type": "|u1"
+    },
+    "398": {
+      "address": 920,
+      "type": "|u1"
+    },
+    "399": {
+      "address": 921,
+      "type": "|u1"
+    },
+    "39a": {
+      "address": 922,
+      "type": "|u1"
+    },
+    "39b": {
+      "address": 923,
+      "type": "|u1"
+    },
+    "39c": {
+      "address": 924,
+      "type": "|u1"
+    },
+    "39d": {
+      "address": 925,
+      "type": "|u1"
+    },
+    "39e": {
+      "address": 926,
+      "type": "|u1"
+    },
+    "39f": {
+      "address": 927,
+      "type": "|u1"
+    },
+    "3a0": {
+      "address": 928,
+      "type": "|u1"
+    },
+    "3a1": {
+      "address": 929,
+      "type": "|u1"
+    },
+    "3a2": {
+      "address": 930,
+      "type": "|u1"
+    },
+    "3a3": {
+      "address": 931,
+      "type": "|u1"
+    },
+    "3a4": {
+      "address": 932,
+      "type": "|u1"
+    },
+    "3a5": {
+      "address": 933,
+      "type": "|u1"
+    },
+    "3a6": {
+      "address": 934,
+      "type": "|u1"
+    },
+    "3a7": {
+      "address": 935,
+      "type": "|u1"
+    },
+    "3a8": {
+      "address": 936,
+      "type": "|u1"
+    },
+    "3a9": {
+      "address": 937,
+      "type": "|u1"
+    },
+    "3aa": {
+      "address": 938,
+      "type": "|u1"
+    },
+    "3ab": {
+      "address": 939,
+      "type": "|u1"
+    },
+    "3ac": {
+      "address": 940,
+      "type": "|u1"
+    },
+    "3ad": {
+      "address": 941,
+      "type": "|u1"
+    },
+    "3ae": {
+      "address": 942,
+      "type": "|u1"
+    },
+    "3af": {
+      "address": 943,
+      "type": "|u1"
+    },
+    "3b0": {
+      "address": 944,
+      "type": "|u1"
+    },
+    "3b1": {
+      "address": 945,
+      "type": "|u1"
+    },
+    "3b2": {
+      "address": 946,
+      "type": "|u1"
+    },
+    "3b3": {
+      "address": 947,
+      "type": "|u1"
+    },
+    "3b4": {
+      "address": 948,
+      "type": "|u1"
+    },
+    "3b5": {
+      "address": 949,
+      "type": "|u1"
+    },
+    "3b6": {
+      "address": 950,
+      "type": "|u1"
+    },
+    "3b7": {
+      "address": 951,
+      "type": "|u1"
+    },
+    "3b8": {
+      "address": 953,
+      "type": "|u1"
+    },
+    "3ba": {
+      "address": 954,
+      "type": "|u1"
+    },
+    "3bb": {
+      "address": 955,
+      "type": "|u1"
+    },
+    "3bc": {
+      "address": 956,
+      "type": "|u1"
+    },
+    "3bd": {
+      "address": 957,
+      "type": "|u1"
+    },
+    "3be": {
+      "address": 958,
+      "type": "|u1"
+    },
+    "3bf": {
+      "address": 959,
+      "type": "|u1"
+    },
+    "3c0": {
+      "address": 960,
+      "type": "|u1"
+    },
+    "3c1": {
+      "address": 961,
+      "type": "|u1"
+    },
+    "3c2": {
+      "address": 962,
+      "type": "|u1"
+    },
+    "3c3": {
+      "address": 963,
+      "type": "|u1"
+    },
+    "3c4": {
+      "address": 964,
+      "type": "|u1"
+    },
+    "3c5": {
+      "address": 965,
+      "type": "|u1"
+    },
+    "3c6": {
+      "address": 966,
+      "type": "|u1"
+    },
+    "3c7": {
+      "address": 967,
+      "type": "|u1"
+    },
+    "3c8": {
+      "address": 968,
+      "type": "|u1"
+    },
+    "3c9": {
+      "address": 969,
+      "type": "|u1"
+    },
+    "3ca": {
+      "address": 970,
+      "type": "|u1"
+    },
+    "3cb": {
+      "address": 971,
+      "type": "|u1"
+    },
+    "3cc": {
+      "address": 972,
+      "type": "|u1"
+    },
+    "3cd": {
+      "address": 973,
+      "type": "|u1"
+    },
+    "3ce": {
+      "address": 974,
+      "type": "|u1"
+    },
+    "3cf": {
+      "address": 975,
+      "type": "|u1"
+    },
+    "3d0": {
+      "address": 976,
+      "type": "|u1"
+    },
+    "3d1": {
+      "address": 977,
+      "type": "|u1"
+    },
+    "3d2": {
+      "address": 978,
+      "type": "|u1"
+    },
+    "3d3": {
+      "address": 979,
+      "type": "|u1"
+    },
+    "3d4": {
+      "address": 980,
+      "type": "|u1"
+    },
+    "3d5": {
+      "address": 981,
+      "type": "|u1"
+    },
+    "3d6": {
+      "address": 982,
+      "type": "|u1"
+    },
+    "3d7": {
+      "address": 983,
+      "type": "|u1"
+    },
+    "3d8": {
+      "address": 984,
+      "type": "|u1"
+    },
+    "3d9": {
+      "address": 985,
+      "type": "|u1"
+    },
+    "3da": {
+      "address": 986,
+      "type": "|u1"
+    },
+    "3db": {
+      "address": 987,
+      "type": "|u1"
+    },
+    "3dc": {
+      "address": 988,
+      "type": "|u1"
+    },
+    "3dd": {
+      "address": 989,
+      "type": "|u1"
+    },
+    "3de": {
+      "address": 990,
+      "type": "|u1"
+    },
+    "3df": {
+      "address": 991,
+      "type": "|u1"
+    },
+    "3e0": {
+      "address": 992,
+      "type": "|u1"
+    },
+    "3e1": {
+      "address": 993,
+      "type": "|u1"
+    },
+    "3e2": {
+      "address": 994,
+      "type": "|u1"
+    },
+    "3e3": {
+      "address": 995,
+      "type": "|u1"
+    },
+    "3e4": {
+      "address": 996,
+      "type": "|u1"
+    },
+    "3e5": {
+      "address": 997,
+      "type": "|u1"
+    },
+    "3e6": {
+      "address": 998,
+      "type": "|u1"
+    },
+    "3e7": {
+      "address": 999,
+      "type": "|u1"
+    },
+    "3e8": {
+      "address": 1000,
+      "type": "|u1"
+    },
+    "3e9": {
+      "address": 1001,
+      "type": "|u1"
+    },
+    "3ea": {
+      "address": 1002,
+      "type": "|u1"
+    },
+    "3eb": {
+      "address": 1003,
+      "type": "|u1"
+    },
+    "3ec": {
+      "address": 1004,
+      "type": "|u1"
+    },
+    "3ed": {
+      "address": 1005,
+      "type": "|u1"
+    },
+    "3ee": {
+      "address": 1006,
+      "type": "|u1"
+    },
+    "3ef": {
+      "address": 1007,
+      "type": "|u1"
+    },
+    "3f0": {
+      "address": 1008,
+      "type": "|u1"
+    },
+    "3f1": {
+      "address": 1009,
+      "type": "|u1"
+    },
+    "3f2": {
+      "address": 1010,
+      "type": "|u1"
+    },
+    "3f3": {
+      "address": 1011,
+      "type": "|u1"
+    },
+    "3f4": {
+      "address": 1012,
+      "type": "|u1"
+    },
+    "3f5": {
+      "address": 1013,
+      "type": "|u1"
+    },
+    "3f6": {
+      "address": 1014,
+      "type": "|u1"
+    },
+    "3f7": {
+      "address": 1015,
+      "type": "|u1"
+    },
+    "3f8": {
+      "address": 1016,
+      "type": "|u1"
+    },
+    "3f9": {
+      "address": 1017,
+      "type": "|u1"
+    },
+    "3fa": {
+      "address": 1018,
+      "type": "|u1"
+    },
+    "3fb": {
+      "address": 1019,
+      "type": "|u1"
+    },
+    "3fc": {
+      "address": 1020,
+      "type": "|u1"
+    },
+    "3fd": {
+      "address": 1021,
+      "type": "|u1"
+    },
+    "3fe": {
+      "address": 1022,
+      "type": "|u1"
+    },
+    "3ff": {
+      "address": 1023,
+      "type": "|u1"
+    },
+    "400": {
+      "address": 1024,
+      "type": "|u1"
+    },
+    "401": {
+      "address": 1025,
+      "type": "|u1"
+    },
+    "402": {
+      "address": 1026,
+      "type": "|u1"
+    },
+    "403": {
+      "address": 1027,
+      "type": "|u1"
+    },
+    "404": {
+      "address": 1028,
+      "type": "|u1"
+    },
+    "405": {
+      "address": 1029,
+      "type": "|u1"
+    },
+    "406": {
+      "address": 1030,
+      "type": "|u1"
+    },
+    "407": {
+      "address": 1031,
+      "type": "|u1"
+    },
+    "408": {
+      "address": 1032,
+      "type": "|u1"
+    },
+    "409": {
+      "address": 1033,
+      "type": "|u1"
+    },
+    "40a": {
+      "address": 1034,
+      "type": "|u1"
+    },
+    "40b": {
+      "address": 1035,
+      "type": "|u1"
+    },
+    "40e": {
+      "address": 1038,
+      "type": "|u1"
+    },
+    "40f": {
+      "address": 1039,
+      "type": "|u1"
+    },
+    "410": {
+      "address": 1040,
+      "type": "|u1"
+    },
+    "411": {
+      "address": 1041,
+      "type": "|u1"
+    },
+    "412": {
+      "address": 1042,
+      "type": "|u1"
+    },
+    "413": {
+      "address": 1043,
+      "type": "|u1"
+    },
+    "414": {
+      "address": 1044,
+      "type": "|u1"
+    },
+    "415": {
+      "address": 1045,
+      "type": "|u1"
+    },
+    "416": {
+      "address": 1046,
+      "type": "|u1"
+    },
+    "417": {
+      "address": 1047,
+      "type": "|u1"
+    },
+    "418": {
+      "address": 1048,
+      "type": "|u1"
+    },
+    "419": {
+      "address": 1049,
+      "type": "|u1"
+    },
+    "41a": {
+      "address": 1050,
+      "type": "|u1"
+    },
+    "41b": {
+      "address": 1051,
+      "type": "|u1"
+    },
+    "41c": {
+      "address": 1052,
+      "type": "|u1"
+    },
+    "41d": {
+      "address": 1053,
+      "type": "|u1"
+    },
+    "41e": {
+      "address": 1054,
+      "type": "|u1"
+    },
+    "41f": {
+      "address": 1055,
+      "type": "|u1"
+    },
+    "420": {
+      "address": 1056,
+      "type": "|u1"
+    },
+    "421": {
+      "address": 1057,
+      "type": "|u1"
+    },
+    "422": {
+      "address": 1058,
+      "type": "|u1"
+    },
+    "423": {
+      "address": 1059,
+      "type": "|u1"
+    },
+    "424": {
+      "address": 1060,
+      "type": "|u1"
+    },
+    "425": {
+      "address": 1061,
+      "type": "|u1"
+    },
+    "426": {
+      "address": 1062,
+      "type": "|u1"
+    },
+    "427": {
+      "address": 1063,
+      "type": "|u1"
+    },
+    "428": {
+      "address": 1064,
+      "type": "|u1"
+    },
+    "429": {
+      "address": 1065,
+      "type": "|u1"
+    },
+    "42a": {
+      "address": 1066,
+      "type": "|u1"
+    },
+    "42b": {
+      "address": 1067,
+      "type": "|u1"
+    },
+    "42c": {
+      "address": 1068,
+      "type": "|u1"
+    },
+    "42d": {
+      "address": 1069,
+      "type": "|u1"
+    },
+    "42e": {
+      "address": 1070,
+      "type": "|u1"
+    },
+    "42f": {
+      "address": 1071,
+      "type": "|u1"
+    },
+    "bonus.double|laser": {
+      "address": 68,
+      "type": "|u1"
+    },
+    "bonus.missile": {
+      "address": 65,
+      "type": "|u1"
+    },
+    "bonus.options": {
+      "address": 69,
+      "type": "|u1"
+    },
+    "bonus.select": {
+      "address": 66,
+      "type": "|u1"
+    },
+    "bonus.speed": {
+      "address": 64,
+      "type": "|u1"
+    },
+    "checkpoint": {
+      "address": 63,
+      "type": "|u1"
+    },
+    "enemy_0.x": {
+      "address": 886,
+      "type": "|u1"
+    },
+    "enemy_0.y": {
+      "address": 822,
+      "type": "|u1"
+    },
+    "enemy_1.type": {
+      "address": 789,
+      "type": "|u1"
+    },
+    "enemy_1.x": {
+      "address": 885,
+      "type": "|u1"
+    },
+    "enemy_1.y": {
+      "address": 821,
+      "type": "|u1"
+    },
+    "enemy_2.type": {
+      "address": 788,
+      "type": "|u1"
+    },
+    "enemy_2.x": {
+      "address": 884,
+      "type": "|u1"
+    },
+    "enemy_2.y": {
+      "address": 820,
+      "type": "|u1"
+    },
+    "enemy_3.type": {
+      "address": 787,
+      "type": "|u1"
+    },
+    "enemy_3.x": {
+      "address": 883,
+      "type": "|u1"
+    },
+    "enemy_3.y": {
+      "address": 819,
+      "type": "|u1"
+    },
+    "enemy_4.type": {
+      "address": 786,
+      "type": "|u1"
+    },
+    "enemy_4.x": {
+      "address": 882,
+      "type": "|u1"
+    },
+    "enemy_4.y": {
+      "address": 818,
+      "type": "|u1"
+    },
+    "enemy_5.type": {
+      "address": 785,
+      "type": "|u1"
+    },
+    "enemy_5.x": {
+      "address": 881,
+      "type": "|u1"
+    },
+    "enemy_5.y": {
+      "address": 817,
+      "type": "|u1"
+    },
+    "enemy_6.type": {
+      "address": 784,
+      "type": "|u1"
+    },
+    "enemy_6.x": {
+      "address": 880,
+      "type": "|u1"
+    },
+    "enemy_6.y": {
+      "address": 816,
+      "type": "|u1"
+    },
+    "enemy_7.type": {
+      "address": 783,
+      "type": "|u1"
+    },
+    "enemy_7.x": {
+      "address": 879,
+      "type": "|u1"
+    },
+    "enemy_7.y": {
+      "address": 815,
+      "type": "|u1"
+    },
+    "enemy_8.type": {
+      "address": 782,
+      "type": "|u1"
+    },
+    "enemy_8.x": {
+      "address": 878,
+      "type": "|u1"
+    },
+    "enemy_8.y": {
+      "address": 814,
+      "type": "|u1"
+    },
+    "enemy_9.type": {
+      "address": 781,
+      "type": "|u1"
+    },
+    "enemy_9.x": {
+      "address": 877,
+      "type": "|u1"
+    },
+    "enemy_9.y": {
+      "address": 813,
+      "type": "|u1"
+    },
+    "enemy_a.type": {
+      "address": 780,
+      "type": "|u1"
+    },
+    "enemy_a.x": {
+      "address": 876,
+      "type": "|u1"
+    },
+    "enemy_a.y": {
+      "address": 812,
+      "type": "|u1"
+    },
+    "enemy_b.type": {
+      "address": 779,
+      "type": "|u1"
+    },
+    "enemy_b.x": {
+      "address": 875,
+      "type": "|u1"
+    },
+    "enemy_b.y": {
+      "address": 811,
+      "type": "|u1"
+    },
+    "enemy_c.type": {
+      "address": 778,
+      "type": "|u1"
+    },
+    "enemy_c.x": {
+      "address": 874,
+      "type": "|u1"
+    },
+    "enemy_c.y": {
+      "address": 810,
+      "type": "|u1"
+    },
+    "enemy_e.type": {
+      "address": 776,
+      "type": "|u1"
+    },
+    "enemy_e.x": {
+      "address": 872,
+      "type": "|u1"
+    },
+    "enemy_e.y": {
+      "address": 808,
+      "type": "|u1"
+    },
+    "enemy_f.type": {
+      "address": 775,
+      "type": "|u1"
+    },
+    "enemy_f.x": {
+      "address": 871,
+      "type": "|u1"
+    },
+    "enemy_f.y": {
+      "address": 807,
+      "type": "|u1"
+    },
+    "lives": {
+      "address": 32,
+      "type": "|u1"
+    },
+    "missile.x": {
+      "address": 873,
+      "type": "|u1"
+    },
+    "missile.y": {
+      "address": 809,
+      "type": "|u1"
+    },
+    "p1.x": {
+      "address": 864,
+      "type": "|u1"
+    },
+    "p1.y": {
+      "address": 800,
+      "type": "|u1"
+    },
+    "score": {
+      "address": 2020,
+      "type": "<d3"
+    },
+    "scrollX": {
+      "address": 62,
+      "type": "|u1"
+    },
+    "shot_1.x": {
+      "address": 867,
+      "type": "|u1"
+    },
+    "shot_1.y": {
+      "address": 803,
+      "type": "|u1"
+    },
+    "shot_2.x": {
+      "address": 870,
+      "type": "|u1"
+    },
+    "shot_2.y": {
+      "address": 806,
+      "type": "|u1"
+    },
+    "xxxs": {
+      "address": 736,
+      "type": ">d8"
+    },
+    "xxxt": {
+      "address": 744,
+      "type": ">d8"
+    },
+    "xxxu": {
+      "address": 752,
+      "type": ">d8"
+    },
+    "xxxv": {
+      "address": 760,
+      "type": ">d8"
+    },
+    "xxxw": {
+      "address": 1528,
+      "type": ">d8"
+    },
+    "xxxx": {
+      "address": 1536,
+      "type": ">d8"
+    }
+  }
+}

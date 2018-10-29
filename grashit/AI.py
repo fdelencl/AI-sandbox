@@ -8,6 +8,12 @@ import time
 import torch.optim as optim
 import torch
 import torch.nn as nn
+from statistics import mean
+from math import sqrt
+
+import matplotlib
+import matplotlib.pyplot as plt
+
 
 import signal
 import sys
@@ -17,22 +23,23 @@ import torchvision.transforms as T
 
 transform = T.Compose([T.ToTensor()])
 
-env = retro.make(game='Gradius-Nes', state='Level1')
+env = retro.make(game='Gradius-Nes', state='./Level1', scenario='./roms/scenario.json', info='./roms/data.json')
 # env = retro.make(game='GradiusIII-Snes', state='Level1.Mode1.Shield')
 
 # [??, B, Select, Start, up, down, left, right, A]
 
 n = Net().to(device)
 criterion = nn.L1Loss()
+# criterion = nn.CrossEntropyLoss()
 
-m = Memory(10000)
-o = optim.RMSprop(n.parameters(), lr=0.5, momentum=1)
+# m = Memory(140000)
+o = optim.RMSprop(n.parameters(), lr=0.0005, momentum=0.0001)
 
 
 # m.load('loli.kitty')
 
 stop = False
-def signal_handler(sig, frame):
+def signal_handler():
 	global stop
 	stop = True
 signal.signal(signal.SIGINT, signal_handler)
@@ -83,51 +90,155 @@ def on_key_release(symbol, modifiers):
 		signal_handler()
 	pass
 
-current_screen = env.reset()
-last_screen = current_screen
-state = current_screen - last_screen
+# screens = [env.reset(), 0, 0, 0, 0]
+state = env.reset()
+current_screen = 0
 env.render()
+state, _rew, done, _info = env.step(user_actions)
 
 env.unwrapped.viewer.window.on_key_press = on_key_press
 env.unwrapped.viewer.window.on_key_release = on_key_release
 
-def optimize():
-	if len(m) < 1000:
-		return 
-	batch = m.sample(1000)
-	actions = torch.zeros((1000, 9, 2), dtype=torch.float).to(device)
-	states = torch.zeros((1000, 3, 224, 240), dtype=torch.float).to(device)
-	rewards = torch.zeros((1000), dtype=torch.float).to(device)
-	for i in range(0, 1000):
-		states[i] = n.prepare_input(batch[i][0])
-		# actions[i] = batch[i][1]
-		rewards[i] = batch[i][3] + 1
-		for j in range(0, 9):
-			actions[i][j][batch[i][1][j]] = rewards[i]
+frames = []
+average_f = []
+scores = []
+average_s = []
+bonuses = []
+average_b = []
+profile = []
+factors = []
 
-	policy = n(states)
-	n.zero_grad()
-	loss = criterion(policy, actions)
+acumulated_reward = 0
+frame = 0
+
+cx = torch.zeros(1, 512).to(device)
+hx = torch.zeros(1, 512).to(device)
+bonus_factor = 0
+actions = []
+outs = []
+
+best_lifetime = 0;
+best_score = 0
+
+plt.ion()
+plt.show()
+
+def plotResults():
+	global frames, scores, average_s, average_f, bonuses, average_b, profile, factors
+	plt.figure(1)
+	plt.clf()
+	plt.title('scores')
+	plt.plot(scores, 'b')
+	plt.plot(average_s, 'g')
+	plt.figure(2)
+	plt.clf()
+	plt.title('lifespan')
+	plt.plot(frames, 'r')
+	plt.plot(average_f, 'g')
+	plt.figure(3)
+	plt.clf()
+	plt.title('bonus')
+	plt.plot(bonuses, 'y')
+	plt.plot(average_b, 'g')
+	plt.figure(4)
+	plt.clf()
+	plt.title('profile')
+	plt.plot(profile, 'r')
+	plt.figure(5)
+	plt.clf()
+	plt.title('factor')
+	plt.plot(factors, 'c')
+	plt.hlines(1, 0, len(factors), 'g')
+	plt.pause(0.001)
+
+def optimize(outputs, frame, score, bonus_factor):
+	global frames, scores, average_f, average_s, profile, best_lifetime, best_score, factors, actions
+	blowit = 1
+	if frame > best_lifetime:
+		best_lifetime = frame
+		blowit = 40
+	
+	if score > best_score:
+		best_score = score
+		blowit = 15
+
+	print('best_lifetime = ', best_lifetime)
+	print('best_score = ', best_score)
+	print('frame = ', frame)
+	print('score = ', score)
+	frames.append(frame)
+
+	score /= frame
+	bonus_factor /= frame
+
+	scores.append(score)
+	bonuses.append(bonus_factor)
+
+	average_frames = mean(frames)
+	average_f.append(average_frames)
+
+	average_scores = mean(scores)
+	average_s.append(average_scores)
+
+	average_bonus = mean(bonuses)
+	average_b.append(average_bonus)
+
+	if average_scores != 0:
+		factor = frame / average_frames * 0.53 + score / average_scores * 0.25 + bonus_factor/average_bonus * 0.20
+	else:
+		factor = (frame / average_frames * 0.53) + bonus_factor/average_bonus * 0.20
+	factors.append(factor)
+
+	expectations = torch.cat(outputs, dim=0)
+	profile = []
+	for i in range(0, len(outputs)):
+		profile.append(sum([1 / abs((i-f)) * (1 - i / len(outputs)) if i != f else 1 for f in frames]))
+
+	for i in range(0, len(outputs)):
+		expectations[i] = outputs[i]
+		expectations[i] *= (profile[i] * frame / len(frames)  + 1)
+		expectations[i][actions[i]] *= factor * blowit
+		expectations[i][[((p + 1) % 2) for p in actions[i]]] /= factor * blowit
+
+
+
+	# for i in range(0, len(outputs)):
+	# 	expectations[i] = expectations[i] * (profile[i] + 0.5)
+	expectations = expectations.detach()
+	# print(outputs)
+	# print(expectations)
+
+	loss = criterion(torch.cat(outputs, dim=0), expectations)
+	print('loss = ', loss)
 	loss.backward()
 	o.step()
-
+	plotResults()
+	print('--------------------------------------------\n\n')
 
 def loop():
-	global current_screen, last_screen, state, next_state
-	last_screen = current_screen
-	action = n.select_action(state)
-	current_screen, _rew, done, _info = env.step(action)
+	# global current_screen, screens, acumulated_reward, frame
+	global best_lifetime, best_score, _info, actions, outs, acumulated_reward, frame, frames, cx, hx, bonus_factor, state
+	action, out, (hx, cx) = n.select_action(state, (cx, hx))
+	actions.append(action)
+	outs.append(out)
+	state, _rew, done, _info = env.step(action)
+
+	acumulated_reward += _rew
+	frame += 1
 
 	if not done and _info['lives'] == 3:
-		next_state = current_screen - last_screen
-		if not (_rew == 0 and random.randint(0, 3) <= 2):
-			m.push(state, action, None, 0)
+		bonus_factor = 0.3*_info['bonus.double|laser'] + 0.4*_info['bonus.missile'] + 1 * _info['bonus.options'] + 0.2 * _info['bonus.speed'] + 0.1
+		pass
 	else:
-		for i in range(0, 3):
-			optimize()
-		env.reset()
-		m.push(state, action, None, -10000)
-	state = next_state
+		optimize(outs, frame, acumulated_reward, bonus_factor)
+		frame = 0
+		outs = []
+		actions = []
+		acumulated_reward = 0
+		cx = torch.zeros(1, 512).to(device)
+		hx = torch.zeros(1, 512).to(device)
+		state = env.reset()
+		n.zero_grad()
 	env.render()
 
 fps = 50
@@ -142,8 +253,5 @@ while not stop:
 		time.sleep(tim1 + skipticks - tim2)
 
 
-
-
-m.save('loli')
 env.close()
 sys.exit(0)
