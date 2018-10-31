@@ -8,7 +8,6 @@ import torch.optim as optim
 import torch
 import torch.nn as nn
 from statistics import mean
-from math import sqrt
 
 import matplotlib
 import matplotlib.pyplot as plt
@@ -31,6 +30,7 @@ n = Net().to(device)
 criterion = nn.L1Loss()
 # criterion = nn.CrossEntropyLoss()
 
+# m = Memory(140000)
 o = optim.RMSprop(n.parameters(), lr=0.0005, momentum=0.0001)
 
 
@@ -164,11 +164,9 @@ def optimize(outputs, frame, score, bonus_factor):
 	print('best_score = ', best_score)
 	print('frame = ', frame)
 	print('score = ', score)
-	frames.append(frame)
-
 	score /= frame
 	bonus_factor /= frame
-
+	frames.append(frame)
 	scores.append(score)
 	bonuses.append(bonus_factor)
 
@@ -190,13 +188,12 @@ def optimize(outputs, frame, score, bonus_factor):
 	expectations = torch.cat(outputs, dim=0)
 	profile = []
 	for i in range(0, len(outputs)):
-		profile.append(sum([1 / abs((i-f)) * (1 - i / len(outputs)) if i != f else 1 for f in frames]))
+		profile.append(sum([2 / ((i-f) ** 2) * (1 - i / len(outputs)) if i != f else 1 for f in frames]))
 
 	for i in range(0, len(outputs)):
 		expectations[i] = outputs[i]
-		expectations[i] *= (profile[i] * frame / len(frames)  + 1)
+		expectations[i] *= (profile[i] * 10 / len(frames)  + 1)
 		expectations[i][actions[i]] *= factor * blowit
-		expectations[i][[((p + 1) % 2) for p in actions[i]]] /= factor * blowit
 
 
 
@@ -215,8 +212,8 @@ def optimize(outputs, frame, score, bonus_factor):
 
 def loop():
 	# global current_screen, screens, acumulated_reward, frame
-	global best_lifetime, best_score, _info, actions, outs, acumulated_reward, frame, frames, cx, hx, bonus_factor, state
-	action, out, (hx, cx) = n.select_action(state, (cx, hx))
+	global best_lifetime, best_score, _info, actions, outs, acumulated_reward, frame, frames, cx, hx, bonus_factor
+	action, out, (hx, cx) = n.select_action(_info, (cx, hx))
 	actions.append(action)
 	outs.append(out)
 	state, _rew, done, _info = env.step(action)

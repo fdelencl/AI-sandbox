@@ -1,5 +1,9 @@
 {
   "info": {
+    "": {
+      "address": 61,
+      "type": "|u1"
+    },
     "1bit-clock": {
       "address": 313,
       "type": ">d8"
@@ -78,78 +82,6 @@
     },
     "checkpoint": {
       "address": 63,
-      "type": "|u1"
-    },
-    "enemy_shot_0.x": {
-      "address": 895,
-      "type": "|u1"
-    },
-    "enemy_shot_0.y": {
-      "address": 831,
-      "type": "|u1"
-    },
-    "enemy_shot_1.x": {
-      "address": 894,
-      "type": "|u1"
-    },
-    "enemy_shot_1.y": {
-      "address": 830,
-      "type": "|u1"
-    },
-    "enemy_shot_2.x": {
-      "address": 893,
-      "type": "|u1"
-    },
-    "enemy_shot_2.y": {
-      "address": 829,
-      "type": "|u1"
-    },
-    "enemy_shot_3.x": {
-      "address": 892,
-      "type": "|u1"
-    },
-    "enemy_shot_3.y": {
-      "address": 828,
-      "type": "|u1"
-    },
-    "enemy_shot_4.x": {
-      "address": 891,
-      "type": "|u1"
-    },
-    "enemy_shot_4.y": {
-      "address": 827,
-      "type": "|u1"
-    },
-    "enemy_shot_5.x": {
-      "address": 890,
-      "type": "|u1"
-    },
-    "enemy_shot_5.y": {
-      "address": 826,
-      "type": "|u1"
-    },
-    "enemy_shot_6.x": {
-      "address": 889,
-      "type": "|u1"
-    },
-    "enemy_shot_6.y": {
-      "address": 825,
-      "type": "|u1"
-    },
-    "enemy_shot_7.x": {
-      "address": 888,
-      "type": "|u1"
-    },
-    "enemy_shot_7.y": {
-      "address": 824,
-      "type": "|u1"
-    },
-    "enemy_shot_8.x": {
-      "address": 887,
-      "type": "|u1"
-    },
-    "enemy_shot_8.y": {
-      "address": 823,
       "type": "|u1"
     },
     "enemy_0.x": {
@@ -371,6 +303,30 @@
     "shot_2.y": {
       "address": 806,
       "type": "|u1"
+    },
+    "xxxs": {
+      "address": 736,
+      "type": ">d8"
+    },
+    "xxxt": {
+      "address": 744,
+      "type": ">d8"
+    },
+    "xxxu": {
+      "address": 752,
+      "type": ">d8"
+    },
+    "xxxv": {
+      "address": 760,
+      "type": ">d8"
+    },
+    "xxxw": {
+      "address": 1528,
+      "type": ">d8"
+    },
+    "xxxx": {
+      "address": 1536,
+      "type": ">d8"
     }
   }
 }

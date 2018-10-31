@@ -22,34 +22,43 @@ class Net(nn.Module):
 
 	def __init__(self):
 		super(Net, self).__init__()
-		
-		self.lstm = nn.LSTMCell(512, 512)
+		self.head1 = nn.Linear(93, 256)
+		self.head2 = nn.Linear(256, 2048)
+		self.head3 = nn.Linear(2048, 2048)
+		self.head4 = nn.Linear(2048, 1024)
+		self.lstm = nn.LSTMCell(1024, 512)
 		self.head = nn.Linear(512, 18)
 
 		self.lstm.bias_ih.data.fill_(0)
 		self.lstm.bias_hh.data.fill_(0)
 
+		self.train()
+
 	def forward(self, inputs):
 		input, (hx, cx) = inputs
-		# x = self.conv1(input)
-		# x = F.relu(self.bn1(x))
-		# x = self.conv4(x)
-		# x = F.relu(self.bn4(x))
-		# x = F.relu(self.head1(x.view(x.size(0), -1)))
+		x = self.head1(input)
+		x = F.relu(x)
+		x = self.head2(x)
+		x = F.relu(x)
+		x = self.head3(x)
+		x = F.relu(x)
+		x = self.head4(x)
+		x = F.relu(x)
 		hx, cx = self.lstm(x.view(x.size(0), -1), (hx, cx))
 		x = hx
-		x = F.relu(self.head2(x))
+		x = F.relu(self.head(x))
 		
 		return x.view((x.size(0), 9, 2)), (hx, cx)
 
-	def prepare_input(self, screen):
-		# inp = []
-		# for key, value in info.items():
-		#     inp.append(value)
+
+	def prepare_input(self, info):
+		inp = []
+		for key, value in info.items():
+		    inp.append(value)
 		# print(inp)
 		# print(len(inp))
-		inp = transform(screen)
-		# inp = torch.Tensor(inp)
+		# inp = transform(inp)
+		inp = torch.Tensor(inp)
 		# print(inp)
 		return inp.unsqueeze(0).to(device)
 
