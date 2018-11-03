@@ -22,10 +22,10 @@ class Net(nn.Module):
 
 	def __init__(self):
 		super(Net, self).__init__()
-		self.head1 = nn.Linear(93, 256)
-		self.head2 = nn.Linear(256, 2048)
-		self.head3 = nn.Linear(2048, 2048)
-		self.head4 = nn.Linear(2048, 1024)
+		self.head1 = nn.Linear(93, 512)
+		self.head2 = nn.Linear(512, 3500)
+		self.head3 = nn.Linear(3500, 3500)
+		self.head4 = nn.Linear(3500, 1024)
 		self.lstm = nn.LSTMCell(1024, 512)
 		self.head = nn.Linear(512, 18)
 
@@ -46,7 +46,7 @@ class Net(nn.Module):
 		x = F.relu(x)
 		hx, cx = self.lstm(x.view(x.size(0), -1), (hx, cx))
 		x = hx
-		x = F.relu(self.head(x))
+		x = torch.sigmoid(self.head(x))
 		
 		return x.view((x.size(0), 9, 2)), (hx, cx)
 
