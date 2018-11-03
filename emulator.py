@@ -13,14 +13,16 @@ class Emulator:
 		scenario=None,
 		info=None,
 		render=True,
-		fps=50):
+		fps=50,
+		recorder=None):
 
 		self.render = render
 		self.fps = fps
+		self.recorder = recorder
 		self.env = retro.make(game=game, state=state)
 		self.env.reset()
 		self.user_actions = [0, 0, 0, 0, 0, 0, 0, 0, 0]
-		self.end = False
+		self.end_game = False
 		if (render):
 			self.env.render()
 			self.env.unwrapped.viewer.window.on_key_press = self.on_key_press
@@ -59,16 +61,18 @@ class Emulator:
 		if symbol == 32:    #spacebar -> shoot
 			self.user_actions[8] = 0
 		if symbol == 65307: #escape -> end_game
-			self.end = True
+			self.end_game = True
 		pass
 
 	def before_run(self):
+		if self.recorder != None:
+			self.recorder.new_session()
 		return
 
 	def run(self):
 		self.before_run()
-		skipticks = 1 / self.fps
-		while not self.end:
+		skipticks = 1 / self.fps if self.fps != 0 else 0
+		while not self.end_game:
 			frame_start = time.perf_counter()
 			self.step()
 			frame_end = time.perf_counter()
@@ -76,6 +80,8 @@ class Emulator:
 				pass
 			else:
 				time.sleep(frame_start + skipticks - frame_end)
+		self.done()
+		self.end()
 
 	def before_step(self):
 		return
@@ -83,17 +89,23 @@ class Emulator:
 	def step(self):
 		self.before_step()
 		screen, _, done, _ = self.env.step(self.user_actions);
+		RAM = self.env.data.memory.blocks[0]
+		input = self.user_actions
 		if self.render:
 			self.env.render()
-		self.after_step()
+		self.after_step(RAM, input, screen)
 		if done:
 			self.done()
 
 
-	def after_step(self):
+	def after_step(self, RAM, input, screen):
+		if self.recorder != None:
+			self.recorder.record(RAM, input, screen)
 		return
 
 	def done(self):
+		if self.recorder != None:
+			self.recorder.save_session()
 		self.env.reset()
 
 	def end(self):
