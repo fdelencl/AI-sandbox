@@ -42,7 +42,6 @@ class Emulator:
 			self.user_actions[7] = 1
 		if symbol == 32:    #spacebar -> shoot
 			self.user_actions[8] = 1
-		pass
 
 	def on_key_release(self, symbol, modifiers):
 		global  user_actions
@@ -62,7 +61,6 @@ class Emulator:
 			self.user_actions[8] = 0
 		if symbol == 65307: #escape -> end_game
 			self.end_game = True
-		pass
 
 	def before_run(self):
 		if self.recorder != None:
@@ -76,6 +74,7 @@ class Emulator:
 			frame_start = time.perf_counter()
 			self.step()
 			frame_end = time.perf_counter()
+			# print('framerate = ', 1/(frame_end - frame_start))
 			if frame_end > frame_start + skipticks:
 				pass
 			else:
