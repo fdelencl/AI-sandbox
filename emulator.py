@@ -19,7 +19,7 @@ class Emulator:
 		self.render = render
 		self.fps = fps
 		self.recorder = recorder
-		self.env = retro.make(game=game, state=state)
+		self.env = retro.make(game=game, state=state, info=info)
 		self.env.reset()
 		self.user_actions = [0, 0, 0, 0, 0, 0, 0, 0, 0]
 		self.end_game = False
@@ -48,7 +48,7 @@ class Emulator:
 		if symbol == 65288: #backspace
 			self.env.reset()
 		if symbol == 65505: #shift -> pick option
-			self.user_actions[1] = 0
+			self.user_actions[0] = 0
 		if symbol == 119:   #w -> up
 			self.user_actions[4] = 0
 		if symbol == 115:   #s -> down
@@ -87,17 +87,17 @@ class Emulator:
 
 	def step(self):
 		self.before_step()
-		screen, _, done, _ = self.env.step(self.user_actions);
-		RAM = self.env.data.memory.blocks[0]
+		screen, _, done, _info = self.env.step(self.user_actions);
+		RAM = list(self.env.data.memory.blocks[0] + self.env.data.memory.blocks[1024])
 		input = self.user_actions
 		if self.render:
 			self.env.render()
-		self.after_step(RAM, input, screen)
+		self.after_step(RAM, input, screen, _info)
 		if done:
 			self.done()
 
 
-	def after_step(self, RAM, input, screen):
+	def after_step(self, RAM, input, screen, info):
 		if self.recorder != None:
 			self.recorder.record(RAM, input, screen)
 		return

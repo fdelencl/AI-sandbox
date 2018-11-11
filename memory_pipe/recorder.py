@@ -5,12 +5,13 @@ import os
 
 class Recorder:
 
-	def __init__(self, index_path='./memory_pipe/memory/db_index', db_path='./memory_pipe/memory'):
+	def __init__(self, index_path='./memory_pipe/memory/db_index.json', db_path='./memory_pipe/memory'):
 		self.db_path = db_path
 		self.index_path = index_path
 		if os.path.isfile(index_path):
 			with open(index_path, 'r') as index_fd:
 				self.index = json.load(index_fd)
+				print(len(self.index))
 		else:
 			self.index = []
 		self.new_session()
@@ -40,5 +41,5 @@ class Recorder:
 		with open(session_path, 'wb') as session_fd:
 			pickle.dump(self.session, session_fd)
 		with open(self.index_path, 'w') as index_fd:
-			self.index = json.dump(self.index, index_fd)
+			json.dump(self.index, index_fd)
 		self.new_session()

@@ -23,11 +23,11 @@ class ScreenReader(nn.Module):
 		self.conv4 = nn.Conv2d(32, 32, kernel_size=5, stride=2)
 		self.bn4 = nn.BatchNorm2d(32)
 		self.lstm = nn.LSTMCell(4224, 1536)
-		self.head = nn.Linear(1536, 1536)
-
+		self.head1 = nn.Linear(1536, 1536)
+		self.head2 = nn.Linear(1536, 79)
 
 	def forward(self, input, hidden):
-		(hx, cx) = hidden
+		hx, cx = hidden
 		x = F.relu(self.conv1(input))
 		x = self.bn1(x)
 		x = F.relu(self.conv2(x))
@@ -38,7 +38,8 @@ class ScreenReader(nn.Module):
 		x = self.bn4(x)
 		x = x.view(x.size(0), -1)
 		hx, cx = self.lstm(x, (hx, cx))
-		x = F.relu(self.head(hx))
+		x = F.relu(self.head1(hx))
+		x = F.relu(self.head2(x))
 		return x, (hx, cx)
 
 	def prepare_input(self, screen):
@@ -46,17 +47,17 @@ class ScreenReader(nn.Module):
 		return screen.unsqueeze(0).to(device)
 
 	def estimate_ram(self, screen, hidden):
-		input = self.prepare_input(screen)
-		out, hidden = self(input, hidden)
+		input = self.prepare_input(screen, hidden)
+		out, hidden = self(input)
 		return out, hidden
 
-	def load(self, path='./screen_reader.model'):
+	def load(self, path='./screen_saver.model'):
 		if os.path.isfile(path):
 			self.load_state_dict(torch.load(path))
 		else:
 			print('cannot load screen reader from path: ', path)
 		return
 
-	def save(self, path='./screen_reader.model'):
+	def save(self, path='./screen_saver.model'):
 		torch.save(self.state_dict(), path)
 		return
