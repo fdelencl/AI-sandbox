@@ -25,9 +25,6 @@ batch_size = 1000
 criterion = nn.L1Loss()
 optimizer = optim.RMSprop(screen_reader.parameters(), lr=learning_rate, momentum=momentum)
 
-test_result = 0
-
-
 screens = torch.zeros((batch_size, 3, 224, 240), dtype=torch.float, requires_grad=True).to(device)
 predicted = torch.zeros((batch_size, 79), dtype=torch.float, requires_grad=True).to(device)
 referenced = torch.zeros((batch_size, 79), dtype=torch.float, requires_grad=True).to(device)

@@ -1,3 +1,4 @@
 __pycache__
 /memory_pipe/memory
 *.model
+.DS_Store
