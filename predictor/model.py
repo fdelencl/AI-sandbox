@@ -15,29 +15,20 @@ class Predictor(nn.Module):
 
 	def __init__(self):
 		super(Predictor, self).__init__()
-		# self.head1 = nn.Linear(167, 1024)
 		self.head1 = nn.Linear(88, 1024)
-		self.head2 = nn.Linear(1024, 2048)
-		self.head3 = nn.Linear(2048, 1024)
-		self.head4 = nn.Linear(1024, 512)
-		self.idh = nn.Linear(512, 79)
-		self.head5 = nn.Linear(512, 1)
+		self.head2 = nn.Linear(1024, 512)
+		self.head3 = nn.Linear(512, 79)
 
 	def forward(self, input, actions):
 		x = torch.cat((input, actions), 1)
-		x = self.head1(x)
-		x = self.head2(x)
-		x = self.head3(x)
-		x = self.head4(x)
-		# hidden = self.idh(x)
-		x = self.head5(x)
-		# return F.relu(x), hidden.detach()
+		x =  F.relu(self.head1(x))
+		x =  F.relu(self.head2(x))
+		x =  self.head3(x)
 		return F.relu(x)
 
 
 	def estimate_value(self, RAM, actions):
 		actions = torch.Tensor(actions).to(device)
-		# out, hidden = self(RAM, hidden, actions)
 		out = self(RAM, actions)
 		return out
 

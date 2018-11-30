@@ -25,7 +25,7 @@ class Model(nn.Module):
 
 		self.lstm = nn.LSTMCell(4224, 1536)
 		self.position_linear = nn.Linear(1536, 2)
-		self.actor_linear = nn.Linear(1536, 8)
+		self.actor_linear = nn.Linear(1536, 12)
 		self.critic_linear = nn.Linear(1536, 1)
 
 
@@ -46,7 +46,7 @@ class Model(nn.Module):
 		pos = self.position_linear(hx)
 		act = F.softmax(self.actor_linear(hx), dim=2)
 		val = self.critic_linear(hx)
-		return pos, act, val, (hx, cx)
+		return (pos, act, val), (hx, cx)
 
 	def prepare_input(self, screen):
 		screen = transform(screen)

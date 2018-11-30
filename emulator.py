@@ -14,11 +14,52 @@ class Emulator:
 		info=None,
 		render=True,
 		fps=50,
-		recorder=None):
+		recorder=None,
+		reader=None):
+
+		self.action_spectrum = [
+			[0, 0, 0, 0, 0, 0, 0, 0, 0],
+			[0, 0, 0, 0, 1, 0, 0, 0, 0], # up
+			[0, 0, 0, 0, 1, 0, 1, 0, 0], # up left
+			[0, 0, 0, 0, 1, 0, 0, 1, 0], # up right
+			[0, 0, 0, 0, 0, 1, 0, 0, 0], # down
+			[0, 0, 0, 0, 0, 1, 1, 0, 0], # down left
+			[0, 0, 0, 0, 0, 1, 0, 1, 0], # down right
+			[0, 0, 0, 0, 0, 0, 1, 0, 0], # left
+			[0, 0, 0, 0, 0, 0, 0, 1, 0], # right
+			[0, 0, 0, 0, 0, 0, 0, 0, 1], # shoot
+			[0, 0, 0, 0, 1, 0, 0, 0, 1], # shoot up
+			[0, 0, 0, 0, 1, 0, 1, 0, 1], # shoot up left
+			[0, 0, 0, 0, 1, 0, 0, 1, 1], # shoot up right
+			[0, 0, 0, 0, 0, 1, 0, 0, 1], # shoot down
+			[0, 0, 0, 0, 0, 1, 1, 0, 1], # shoot down left
+			[0, 0, 0, 0, 0, 1, 0, 1, 1], # shoot down right
+			[0, 0, 0, 0, 0, 0, 1, 0, 1], # shoot left
+			[0, 0, 0, 0, 0, 0, 0, 1, 1], # shoot right
+			[1, 0, 0, 0, 0, 0, 0, 0, 0], # opt
+			[1, 0, 0, 0, 1, 0, 0, 0, 0], # opt up
+			[1, 0, 0, 0, 1, 0, 1, 0, 0], # opt up left
+			[1, 0, 0, 0, 1, 0, 0, 1, 0], # opt up right
+			[1, 0, 0, 0, 0, 1, 0, 0, 0], # opt down
+			[1, 0, 0, 0, 0, 1, 1, 0, 0], # opt down left
+			[1, 0, 0, 0, 0, 1, 0, 1, 0], # opt down right
+			[1, 0, 0, 0, 0, 0, 1, 0, 0], # opt left
+			[1, 0, 0, 0, 0, 0, 0, 1, 0], # opt right
+			[1, 0, 0, 0, 0, 0, 0, 0, 1], # opt shoot
+			[1, 0, 0, 0, 1, 0, 0, 0, 1], # opt shoot up
+			[1, 0, 0, 0, 1, 0, 1, 0, 1], # opt shoot up left
+			[1, 0, 0, 0, 1, 0, 0, 1, 1], # opt shoot up right
+			[1, 0, 0, 0, 0, 1, 0, 0, 1], # opt shoot down
+			[1, 0, 0, 0, 0, 1, 1, 0, 1], # opt shoot down left
+			[1, 0, 0, 0, 0, 1, 0, 1, 1], # opt shoot down right
+			[1, 0, 0, 0, 0, 0, 1, 0, 1], # opt shoot left
+			[1, 0, 0, 0, 0, 0, 0, 1, 1], # opt shoot right
+		]
 
 		self.render = render
 		self.fps = fps
 		self.recorder = recorder
+		self.reader = reader
 		self.env = retro.make(game=game, state=state, info=info)
 		self.env.reset()
 		self.user_actions = [0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -83,6 +124,8 @@ class Emulator:
 		self.end()
 
 	def before_step(self):
+		if self.reader != None:
+			self.user_actions = self.reader.next_frame()['input']
 		return
 
 	def step(self):

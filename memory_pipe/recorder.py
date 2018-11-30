@@ -11,7 +11,6 @@ class Recorder:
 		if os.path.isfile(index_path):
 			with open(index_path, 'r') as index_fd:
 				self.index = json.load(index_fd)
-				print(len(self.index))
 		else:
 			self.index = []
 		self.new_session()
@@ -19,10 +18,10 @@ class Recorder:
 	def new_session(self, player=None):
 		self.session = { 'RAMs': [], 'inputs': [], 'screens': [], 'recorded_at': time.time(), 'player': player}
 
-	def record(self, RAM, input, screen):
-		self.session['RAMs'].append(RAM)
-		self.session['inputs'].append(input)
-		self.session['screens'].append(screen)
+	def record(self, RAM, inp, screen):
+		self.session['RAMs'].append(RAM.copy())
+		self.session['inputs'].append(inp.copy())
+		self.session['screens'].append(screen.copy())
 
 	def save_session(self, final_score=0):
 		self.session['length'] = len(self.session['RAMs'])
