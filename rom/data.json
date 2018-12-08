@@ -96,6 +96,10 @@
       "address": 823,
       "type": "|u1"
     },
+    "enemy_0.type": {
+      "address": 790,
+      "type": "|u1"
+    },
     "enemy_0.x": {
       "address": 886,
       "type": "|u1"

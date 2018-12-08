@@ -25,18 +25,25 @@ class Model(nn.Module):
 
 		self.lstm = nn.LSTMCell(2880, 1024)
 
-		self.enemy_linear0 = nn.Linear(2880, 1024)
-		self.enemy_linear1 = nn.Linear(1024, 512)
-		self.enemy_linear2 = nn.Linear(512, 256)
-		self.enemy_linear3 = nn.Linear(256, 125)
-		self.enemy_linear4 = nn.Linear(125, 125)
-		self.enemy_linear5 = nn.Linear(125, 125)
-		self.enemy_linear6 = nn.Linear(125, 125)
-		self.enemy_linear7 = nn.Linear(125, 125)
-		self.enemy_linear8 = nn.Linear(125, 125)
-		self.enemy_linear9 = nn.Linear(125, 33)
+		self.enemy_linear0 = nn.Linear(2880, 45)
+		self.enemy_linear1 = nn.Linear(45, 45)
+		self.enemy_linear2 = nn.Linear(45, 45)
+		self.enemy_linear3 = nn.Linear(45, 45)
+		self.enemy_linear4 = nn.Linear(45, 45)
+		self.enemy_linear5 = nn.Linear(45, 45)
+		self.enemy_linear6 = nn.Linear(45, 45)
+		self.enemy_linear7 = nn.Linear(45, 45)
+		self.enemy_linear8 = nn.Linear(45, 45)
+		self.enemy_linear9 = nn.Linear(45, 33)
 
 		self.position_linear = nn.Linear(1024, 2)
+
+		self.actor_linear = nn.Linear(1024, 18)
+
+		self.critic_linear = nn.Linear(1024, 1)
+
+
+
 
 	def forward(self, input, hidden):
 		(hx, cx) = hidden
@@ -64,7 +71,13 @@ class Model(nn.Module):
 
 		hx, cx = self.lstm(x, (hx, cx))
 		pos = self.position_linear(hx)
-		return (pos, ene), (hx, cx)
+
+		act = self.actor_linear(hx)
+		act = act.view(act.size(0), 9, 2)
+		act = F.softmax(act, dim=2)
+
+		val = self.critic_linear(hx)
+		return (pos, ene, act, val), (hx, cx)
 
 	def prepare_input(self, screen):
 		screen = transform(screen)
