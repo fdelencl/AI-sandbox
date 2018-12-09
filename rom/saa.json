@@ -1,0 +1,136 @@
+{
+	"info": {
+		"enemy_0.type": {
+      "address": 790,
+      "type": "|u1"
+    },
+    "enemy_0.x": {
+      "address": 886,
+      "type": "|u1"
+    },
+    "enemy_0.y": {
+      "address": 822,
+      "type": "|u1"
+    },
+    "enemy_1.type": {
+      "address": 789,
+      "type": "|u1"
+    },
+    "enemy_1.x": {
+      "address": 885,
+      "type": "|u1"
+    },
+    "enemy_1.y": {
+      "address": 821,
+      "type": "|u1"
+    },
+    "enemy_2.type": {
+      "address": 788,
+      "type": "|u1"
+    },
+    "enemy_2.x": {
+      "address": 884,
+      "type": "|u1"
+    },
+    "enemy_2.y": {
+      "address": 820,
+      "type": "|u1"
+    },
+    "enemy_3.type": {
+      "address": 787,
+      "type": "|u1"
+    },
+    "enemy_3.x": {
+      "address": 883,
+      "type": "|u1"
+    },
+    "enemy_3.y": {
+      "address": 819,
+      "type": "|u1"
+    },
+    "enemy_4.type": {
+      "address": 786,
+      "type": "|u1"
+    },
+    "enemy_4.x": {
+      "address": 882,
+      "type": "|u1"
+    },
+    "enemy_4.y": {
+      "address": 818,
+      "type": "|u1"
+    },
+    "enemy_5.type": {
+      "address": 785,
+      "type": "|u1"
+    },
+    "enemy_5.x": {
+      "address": 881,
+      "type": "|u1"
+    },
+    "enemy_5.y": {
+      "address": 817,
+      "type": "|u1"
+    },
+    "enemy_6.type": {
+      "address": 784,
+      "type": "|u1"
+    },
+    "enemy_6.x": {
+      "address": 880,
+      "type": "|u1"
+    },
+    "enemy_6.y": {
+      "address": 816,
+      "type": "|u1"
+    },
+    "enemy_7.type": {
+      "address": 783,
+      "type": "|u1"
+    },
+    "enemy_7.x": {
+      "address": 879,
+      "type": "|u1"
+    },
+    "enemy_7.y": {
+      "address": 815,
+      "type": "|u1"
+    },
+    "enemy_8.type": {
+      "address": 782,
+      "type": "|u1"
+    },
+    "enemy_8.x": {
+      "address": 878,
+      "type": "|u1"
+    },
+    "enemy_8.y": {
+      "address": 814,
+      "type": "|u1"
+    },
+    "enemy_9.type": {
+      "address": 781,
+      "type": "|u1"
+    },
+    "enemy_9.x": {
+      "address": 877,
+      "type": "|u1"
+    },
+    "enemy_9.y": {
+      "address": 813,
+      "type": "|u1"
+    },
+    "enemy_a.type": {
+      "address": 780,
+      "type": "|u1"
+    },
+    "enemy_a.x": {
+      "address": 876,
+      "type": "|u1"
+    },
+    "enemy_a.y": {
+      "address": 812,
+      "type": "|u1"
+    },
+	}
+}

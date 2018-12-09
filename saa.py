@@ -1,5 +1,5 @@
 from emulator import Emulator
-from sequenced_analysis_attack.model import Model, device
+from sequenced_analysis_attack.reader import Model, device
 
 import sys
 import torch
@@ -11,6 +11,7 @@ import torchvision
 import numpy as np
 from math import log
 from gym.envs.classic_control.rendering import SimpleImageViewer
+
 
 
 game = SimpleImageViewer()
@@ -98,7 +99,7 @@ class SAAEmulator(Emulator):
 	def after_step(self, RAM, input, screen, info):
 		global current_score, current_life, batch_size, hx, cx
 		# (position, enemies, prob, value), (hx, cx) = SAA.estimate(screen, (hx, cx))
-		(position, enemies), (hx, cx) = SAA.estimate(screen, (hx, cx))
+		(position, enemies), (hx, cx), _ = SAA.estimate(screen, (hx, cx))
 
 		# delta_score = info['score'] - current_score
 		# if current_life != info['lives']:
@@ -110,6 +111,18 @@ class SAAEmulator(Emulator):
 		# self.rewards.append(reward)
 		# current_score = info['score']
 		# current_life = info['lives']
+
+		enemies_shots_positions = [
+			[info['enemy_shot_0.x'], info['enemy_shot_0.y']],
+			[info['enemy_shot_1.x'], info['enemy_shot_1.y']],
+			[info['enemy_shot_2.x'], info['enemy_shot_2.y']],
+			[info['enemy_shot_3.x'], info['enemy_shot_3.y']],
+			[info['enemy_shot_4.x'], info['enemy_shot_4.y']],
+			[info['enemy_shot_5.x'], info['enemy_shot_5.y']],
+			[info['enemy_shot_6.x'], info['enemy_shot_6.y']],
+			[info['enemy_shot_7.x'], info['enemy_shot_7.y']],
+			[info['enemy_shot_8.x'], info['enemy_shot_8.y']]
+		]
 
 		self.ref_positions[self.batch] = torch.tensor([info['p1.x'], info['p1.y']])
 		self.positions[self.batch] = position[0]
@@ -130,6 +143,10 @@ class SAAEmulator(Emulator):
 		enemies_positions = list(map(lambda pt: [0, 0, 0] if pt[2] == 0 else pt, enemies_positions))
 		sorted_enemies = sorted(enemies_positions, reverse=False , key=lambda pt: pt[1] * 255 + pt[0])
 		self.ref_enemies[self.batch] = torch.tensor(sorted_enemies)
+
+
+		# guided_gradients = SAA.gradients.data.numpy()[0]
+		# weights = np.mean(guided_gradients, axis=(1, 2))
 
 
 		p = enemies[0].type(torch.IntTensor).detach()

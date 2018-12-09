@@ -14,57 +14,31 @@ class Model(nn.Module):
 
 	def __init__(self):
 		super(Model, self).__init__()
-		self.conv1 = nn.Conv2d(3, 16, kernel_size=5, stride=2)
-		self.bn1 = nn.BatchNorm2d(16)
-		self.conv2 = nn.Conv2d(16, 32, kernel_size=7, stride=2)
-		self.bn2 = nn.BatchNorm2d(32)
-		self.conv3 = nn.Conv2d(32, 32, kernel_size=7, stride=2)
-		self.bn3 = nn.BatchNorm2d(32)
-		self.conv4 = nn.Conv2d(32, 32, kernel_size=7, stride=2)
-		self.bn4 = nn.BatchNorm2d(32)
 
-		self.lstm = nn.LSTMCell(2880, 1024)
+		self.lstm = nn.LSTMCell(2048, 1024)
 
-		self.enemy_linear0 = nn.Linear(2880, 1024)
-		self.enemy_linear1 = nn.Linear(1024, 512)
-		self.enemy_linear2 = nn.Linear(512, 256)
-		self.enemy_linear3 = nn.Linear(256, 125)
-		self.enemy_linear4 = nn.Linear(125, 125)
-		self.enemy_linear5 = nn.Linear(125, 125)
-		self.enemy_linear6 = nn.Linear(125, 125)
-		self.enemy_linear7 = nn.Linear(125, 125)
-		self.enemy_linear8 = nn.Linear(125, 125)
-		self.enemy_linear9 = nn.Linear(125, 33)
+		self.actor_linear_1 = nn.Linear(1024, 1024)
+		self.actor_linear_2 = nn.Linear(1024, 1024)
+		self.actor_linear_3 = nn.Linear(1024, 1024)
+		self.actor_linear_4 = nn.Linear(1024, 1024)
+		self.actor_linear_5 = nn.Linear(1024, 18)
 
-		self.position_linear = nn.Linear(1024, 2)
+		self.critic_linear = nn.Linear(1024, 1)
 
 	def forward(self, input, hidden):
 		(hx, cx) = hidden
-		x = F.relu(self.conv1(input))
-		x = self.bn1(x)
-		x = F.relu(self.conv2(x))
-		x = self.bn2(x)
-		x = F.relu(self.conv3(x))
-		x = self.bn3(x)
-		x = F.relu(self.conv4(x))
-		x = self.bn4(x)
-		x = x.view(x.size(0), -1)
-
-		ene = self.enemy_linear0(x)
-		ene = self.enemy_linear1(ene)
-		ene = self.enemy_linear2(ene)
-		ene = self.enemy_linear3(ene)
-		ene = self.enemy_linear4(ene)
-		ene = self.enemy_linear5(ene)
-		ene = self.enemy_linear6(ene)
-		ene = self.enemy_linear7(ene)
-		ene = self.enemy_linear8(ene)
-		ene = self.enemy_linear9(ene)
-		ene = ene.view(ene.size(0), 11, 3)
 
 		hx, cx = self.lstm(x, (hx, cx))
-		pos = self.position_linear(hx)
-		return (pos, ene), (hx, cx)
+
+		x =  F.relu(self.actor_linear_1(hx))
+		x =  F.relu(self.actor_linear_2(x))
+		x =  F.relu(self.actor_linear_3(x))
+		x =  F.relu(self.actor_linear_4(x))
+		x =  F.relu(self.actor_linear_5(x))
+		act = ene.view(x.size(0), 9, 2)
+
+		val = self.critic_linear(hx)
+		return (act, val), (hx, cx)
 
 	def prepare_input(self, screen):
 		screen = transform(screen)
